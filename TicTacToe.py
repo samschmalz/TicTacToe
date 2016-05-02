@@ -16,8 +16,8 @@ def Move(player):
     valid = False
     row, col = AskMove()
     while not valid:
-	if row >= 3 or col >= 3:
-	    print ("Not a valid move.  Please try again.")
+	if row >= 3 or row < 0 or col >= 3 or col < 0:
+	    print ("Not a valid move. Please enter values between 1 and 3.")
 	    row, col = AskMove()
 	elif board[row][col] != '_':
 	    print("That space is already taken.  Please try again.")
