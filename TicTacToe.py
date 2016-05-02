@@ -8,29 +8,29 @@ player = "X"
 def PrintBoard():
     for i in range(3):
         row = "| "
-	for j in range(3):
+        for j in range(3):
             row += (board[i][j] + " | ")
-	print(row)
+        print(row)
 
 def Move(player):
     valid = False
     row, col = AskMove()
     while not valid:
-	if row >= 3 or row < 0 or col >= 3 or col < 0:
-	    print ("Not a valid move. Please enter values between 1 and 3.")
-	    row, col = AskMove()
-	elif board[row][col] != '_':
-	    print("That space is already taken.  Please try again.")
-	    row, col = AskMove()
-	else:
-	    board[row][col] = player
-	    valid = True
+        if row >= 3 or row < 0 or col >= 3 or col < 0:
+            print ("Not a valid move. Please enter values between 1 and 3.")
+            row, col = AskMove()
+        elif board[row][col] != '_':
+            print("That space is already taken.  Please try again.")
+            row, col = AskMove()
+        else:
+            board[row][col] = player
+            valid = True
 
 def SwitchPlayers(player):
     if player == "X":
-	player = "O"
+        player = "O"
     elif player == "O":
-	player = "X"
+        player = "X"
     return player
 
 def AskMove():
@@ -45,15 +45,15 @@ def Play(player):
     PrintBoard()
     count = 1
     while count <= 9:
-	PrintPlayer(player)
-	Move(player)
-	PrintBoard()
+        PrintPlayer(player)
+        Move(player)
+        PrintBoard()
         if CheckWin():
             print("Player %s wins" % player)
             break
         else:
-	    player = SwitchPlayers(player)
-	    count += 1
+            player = SwitchPlayers(player)
+            count += 1
 
 def CheckWin():
     for x in range(3):
@@ -63,4 +63,11 @@ def CheckWin():
         return True
     return False
 
-Play(player)
+def ResetBoard():
+    board = [['_' for j in range(3)] for i in range(3)]
+
+while True:
+    Play(player)
+    replay = input("Would you like to play again? (y/n): ")
+    if replay == "n" or replay == "N":
+        break
